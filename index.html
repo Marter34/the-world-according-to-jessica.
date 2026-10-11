@@ -5,699 +5,877 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101426">
-  <meta name="description"
-        content="The World According to Jessica — a personal website and staff portal.">
+  <meta name="description" content="The World According to Jessica — personal website, projects, and staff portal.">
   <title>The World According to Jessica</title>
-
   <style>
     :root {
       color-scheme: dark;
       --bg: #101426;
       --panel: #191f36;
-      --panel-hover: #222a46;
+      --hover: #252d49;
       --text: #f4f5ff;
       --muted: #b8bfd8;
       --accent: #b5a0ff;
       --border: #343d5d;
+      --danger: #ff9baf;
       --radius: 18px;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(ellipse at top, #29244e 0%, transparent 55%),
-        var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
+      margin: 0; min-height: 100vh; color: var(--text);
+      background: radial-gradient(ellipse at top,#29244e 0%,transparent 55%),var(--bg);
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       line-height: 1.7;
     }
-
-    a {
-      color: inherit;
-    }
-
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .container {
-      width: min(100% - 36px, 1000px);
-      margin-inline: auto;
-    }
-
+    a { color: var(--accent); overflow-wrap: anywhere; }
+    button,input,textarea,select { font: inherit; }
+    button,a { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+    .container { width: min(100% - 32px,1000px); margin-inline: auto; }
     header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(16, 20, 38, 0.94);
-      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(16,20,38,.96); border-bottom: 1px solid var(--border);
       backdrop-filter: blur(12px);
     }
-
     nav {
-      min-height: 76px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      padding-block: 12px;
+      min-height: 72px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px; padding-block: 12px;
     }
-
-    .brand {
-      font-weight: 800;
-      font-size: 1rem;
+    .brand { color: var(--text); font-weight: 800; text-decoration: none; }
+    .nav-links,.actions {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    }
+    .nav-link,.button {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 6px; min-height: 43px; padding: 9px 15px;
+      border: 1px solid var(--border); border-radius: 11px;
+      background: var(--panel); color: var(--text); font-weight: 700;
       text-decoration: none;
     }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .nav-link { border-color: transparent; }
+    .nav-link.active,.nav-link:hover,.button:hover {
+      background: var(--hover); border-color: var(--border);
     }
-
-    .nav-link {
-      border: 1px solid transparent;
-      border-radius: 10px;
-      padding: 8px 14px;
-      background: transparent;
-      color: var(--muted);
-      font: inherit;
-      font-weight: 650;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .nav-link:hover,
-    .nav-link.active {
-      background: var(--panel-hover);
-      color: var(--text);
-      border-color: var(--border);
-    }
-
-    main {
-      min-height: 75vh;
-    }
-
-    .page-section {
-      padding-block: 65px 85px;
-      animation: appear 0.25s ease-out;
-    }
-
-    .page-section[hidden] {
-      display: none;
-    }
-
+    .button.primary { background: var(--accent); border-color: var(--accent); color: #19132d; }
+    .button.danger { color: var(--danger); border-color: #704050; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    main { min-height: 75vh; }
+    .page-section { padding-block: 48px 75px; animation: appear .2s ease-out; }
+    .page-section[hidden],[hidden] { display: none !important; }
     @keyframes appear {
-      from {
-        opacity: 0;
-        transform: translateY(5px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    .hero {
-      text-align: center;
-      padding-block: 40px 48px;
-    }
-
+    .hero,.section-heading { text-align: center; }
+    .hero { padding-block: 30px 45px; }
     .eyebrow {
-      color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
+      color: var(--accent); font-size: .8rem; font-weight: 800;
+      letter-spacing: .15em; text-transform: uppercase;
     }
-
-    h1 {
-      font-size: clamp(2.3rem, 7vw, 4.2rem);
-      line-height: 1.12;
-      letter-spacing: -0.045em;
-      margin: 16px 0;
-      overflow-wrap: anywhere;
-    }
-
-    h2 {
-      line-height: 1.25;
-    }
-
-    .hero p,
-    .section-intro {
-      max-width: 650px;
-      margin-inline: auto;
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 46px;
-      padding: 10px 20px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--panel);
-      color: var(--text);
-      font: inherit;
-      font-weight: 750;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .button.primary {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #19132d;
-    }
-
-    .button:hover {
-      filter: brightness(1.12);
-    }
-
-    .section-heading {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-    }
-
+    h1 { font-size: clamp(2.2rem,7vw,4.1rem); line-height: 1.12; letter-spacing: -.04em; overflow-wrap: anywhere; }
+    h2 { line-height: 1.25; }
+    .hero p,.section-heading p { max-width: 680px; margin-inline: auto; color: var(--muted); }
+    .section-heading { margin-bottom: 25px; }
     .grid {
       display: grid;
-      grid-template-columns: repeat(
-        auto-fit, minmax(min(100%, 240px), 1fr)
-      );
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit,minmax(min(100%,240px),1fr));
+      gap: 16px;
     }
-
-    .card {
-      padding: 24px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--panel);
+    .card,.panel {
+      min-width: 0; padding: 22px; background: var(--panel);
+      border: 1px solid var(--border); border-radius: var(--radius);
     }
-
-    .card h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      margin-bottom: 0;
-      color: var(--muted);
-    }
-
+    .card h3 { margin-top: 0; }
+    .card p,.muted { color: var(--muted); }
     .notice {
-      margin-top: 28px;
-      padding: 24px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: rgba(181, 160, 255, 0.07);
+      margin-top: 24px; padding: 22px; background: rgba(181,160,255,.07);
+      border: 1px solid var(--border); border-radius: var(--radius);
     }
-
-    .notice p {
-      color: var(--muted);
-    }
-
+    .notice p { color: var(--muted); }
     .staff-label {
-      display: inline-block;
-      margin-bottom: 12px;
-      padding: 4px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 750;
+      display: inline-block; padding: 3px 10px; margin-bottom: 8px;
+      border: 1px solid var(--border); border-radius: 999px;
+      color: var(--accent); font-size: .8rem; font-weight: 750;
     }
-
+    .stack { display: grid; gap: 14px; }
+    label { display: block; margin-bottom: 5px; font-size: .92rem; font-weight: 700; }
+    input,textarea,select {
+      width: 100%; min-width: 0; padding: 11px 12px; color: var(--text);
+      background: #101426; border: 1px solid var(--border); border-radius: 10px;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    input[type="color"] { width: 65px; height: 45px; padding: 3px; }
+    input[type="checkbox"] { width: auto; }
+    .field-help { color: var(--muted); font-size: .85rem; }
+    .status { min-height: 24px; margin-block: 12px; overflow-wrap: anywhere; }
+    .status.error { color: var(--danger); }
+    .status.success { color: #a7efc0; }
+    .embed-preview {
+      overflow: hidden; border: 1px solid var(--border);
+      border-left: 5px solid var(--embed-color,var(--accent));
+      border-radius: 12px; background: #12172a;
+    }
+    .embed-content { padding: 18px; }
+    .embed-content h3 { margin: 0 0 8px; }
+    .embed-content p { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .embed-image {
+      display: block; max-width: 100%; max-height: 350px;
+      margin-top: 12px; border-radius: 8px; object-fit: contain;
+    }
+    .embed-thumb {
+      float: right; max-width: 90px; max-height: 90px;
+      margin: 0 0 10px 12px; border-radius: 8px; object-fit: cover;
+    }
+    .embed-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .embed-links a {
+      padding: 6px 10px; border: 1px solid var(--border);
+      border-radius: 8px; text-decoration: none;
+    }
+    .embed-footer {
+      margin-top: 16px; padding-top: 10px; border-top: 1px solid var(--border);
+      color: var(--muted); font-size: .85rem;
+    }
+    .embed-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
     footer {
-      padding-block: 24px;
-      border-top: 1px solid var(--border);
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
+      padding-block: 24px; border-top: 1px solid var(--border);
+      color: var(--muted); text-align: center; font-size: .9rem;
     }
-
-    :focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 4px;
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    @media (max-width:560px) {
+      nav { justify-content: center; }
+      .brand { text-align: center; }
+      .nav-links { justify-content: center; }
+      .page-section { padding-block: 30px 55px; }
     }
-
-    @media (max-width: 520px) {
-      nav {
-        justify-content: center;
-      }
-
-      .brand {
-        text-align: center;
-      }
-
-      .nav-links {
-        justify-content: center;
-      }
-
-      .page-section {
-        padding-block: 35px 60px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation: none !important; scroll-behavior: auto !important; }
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <nav class="container" aria-label="Main navigation">
-      <a class="brand" href="#home" data-page="home">
-        The World According to Jessica
-      </a>
-
-      <div class="nav-links">
-        <a class="nav-link active"
-           href="#home"
-           data-page="home"
-           aria-current="page">Home</a>
-
-        <a class="nav-link"
-           href="#staff"
-           data-page="staff">Staff Portal</a>
-      </div>
-    </nav>
-  </header>
-
-  <main class="container">
-    <!-- HOME PAGE -->
-    <section id="home"
-             class="page-section"
-             aria-labelledby="home-title">
-
-      <div class="hero">
-        <span class="eyebrow">Welcome to my website</span>
-
-        <h1 id="home-title">
-          The World According to Jessica
-        </h1>
-
-        <p>
-          Welcome! This is my corner of the internet.
-          Explore the website, learn more about what I do,
-          and visit the staff portal when you need staff resources.
-        </p>
-
-        <div class="actions">
-          <a class="button primary" href="#staff" data-page="staff">
-            Visit Staff Portal
-          </a>
-        </div>
-      </div>
-
-      <div class="section-heading">
-        <h2>Explore the Website</h2>
-        <p>Choose a section to get started.</p>
-      </div>
-
-      <div class="grid">
-        <article class="card">
-          <h3>About This Website</h3>
-          <p>
-            A personal space for projects, ideas, and the things
-            I want to share with the world.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>My Projects</h3>
-          <p>
-            This area can feature my websites, programming work,
-            bots, and other projects.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>Staff Portal</h3>
-          <p>
-            Find staff information, team resources, and guidelines
-            in the staff section of this website.
-          </p>
-          <p>
-            <a href="#staff" data-page="staff">Open Staff Portal</a>
-          </p>
-        </article>
-      </div>
-
-      <div class="notice">
-        <h2>A Work in Progress</h2>
-        <p>
-          This website can grow as new projects, information,
-          and features are added.
-        </p>
-      </div>
-    </section>
-
-    <!-- STAFF PORTAL -->
-    <section id="staff"
-             class="page-section"
-             aria-labelledby="staff-title"
-             hidden>
-
-      <div class="hero">
-        <span class="eyebrow">Team Resources</span>
-
-        <h1 id="staff-title">Staff Portal</h1>
-
-        <p>
-          Welcome to the staff area. Use this section as a central
-          place for staff information, resources, and guidelines.
-        </p>
-
-        <div class="actions">
-          <a class="button primary" href="#home" data-page="home">
-            Return Home
-          </a>
-        </div>
-      </div>
-
-      <div class="section-heading">
-        <h2>Staff Resources</h2>
-        <p>Important information for the team.</p>
-      </div>
-
-      <div class="grid">
-        <article class="card">
-          <span class="staff-label">Guidelines</span>
-          <h3>Staff Rules</h3>
-          <p>
-            Keep staff expectations, responsibilities, and team
-            procedures organized here.
-          </p>
-        </article>
-
-        <article class="card">
-          <span class="staff-label">Resources</span>
-          <h3>Staff Documents</h3>
-          <p>
-            Add links to staff guides, training materials,
-            documentation, and useful resources.
-          </p>
-        </article>
-
-        <article class="card">
-          <span class="staff-label">Support</span>
-          <h3>Need Help?</h3>
-          <p>
-            Contact the website owner for assistance with staff
-            resources or questions about the website.
-          </p>
-        </article>
-      </div>
-
-      <div class="notice">
-        <h2>Staff Information</h2>
-        <p>
-          This section is currently a public-facing information
-          page. Do not publish passwords, private staff details,
-          or confidential documents here.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      &copy; <span id="year"></span>
-      The World According to Jessica.
-      All rights reserved.
+<header>
+  <nav class="container" aria-label="Main navigation">
+    <a class="brand" href="#home" data-page="home">The World According to Jessica</a>
+    <div class="nav-links">
+      <a class="nav-link active" href="#home" data-page="home">Home</a>
+      <a class="nav-link" href="#staff" data-page="staff">Staff Portal</a>
     </div>
-  </footer>
-
-  <script>
-    (() => {
-      const sections = document.querySelectorAll(".page-section");
-      const navigationLinks = document.querySelectorAll("[data-page]");
-
-      function showPage(pageName) {
-        const validPage = pageName === "staff" ? "staff" : "home";
-
-        sections.forEach((section) => {
-          section.hidden = section.id !== validPage;
-        });
-
-        navigationLinks.forEach((link) => {
-          const active = link.dataset.page === validPage;
-
-          if (link.classList.contains("nav-link")) {
-            link.classList.toggle("active", active);
-
-            if (active) {
-              link.setAttribute("aria-current", "page");
-            } else {
-              link.removeAttribute("aria-current");
-            }
-          }
-        });
-
-        document.title = validPage === "staff"
-          ? "Staff Portal | The World According to Jessica"
-          : "The World According to Jessica";
-      }
-
-      function syncPageFromHash() {
-        const pageName = window.location.hash.slice(1);
-        showPage(pageName);
-      }
-
-      window.addEventListener("hashchange", syncPageFromHash);
-
-      navigationLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          showPage(link.dataset.page);
-        });
-      });
-
-      document.getElementById("year").textContent =
-        new Date().getFullYear();
-
-      syncPageFromHash();
-    })();
-  </script>
-</body>
-</html>
-                          <h3>Second chances</h3>
-            <p>People can learn from mistakes and work toward making things right.</p>
-          </article>
-
-          <article class="value">
-            <h3>Fairness</h3>
-            <p>Give people a fair opportunity and judge them by what they do.</p>
-          </article>
-
-          <article class="value">
-            <h3>Patience</h3>
-            <p>Not everyone learns or grows at the same speed.</p>
-          </article>
-
-          <article class="value">
-            <h3>Honesty</h3>
-            <p>Own your mistakes, communicate clearly, and keep learning.</p>
-          </article>
-
-          <article class="value">
-            <h3>Perseverance</h3>
-            <p>Keep trying, even when the first attempt doesn't work.</p>
-          </article>
-        </div>
-
-        <div class="quote">
-          "Fall down 11 times and get up 12 times."
-          <small>A reminder that setbacks don't have to be the end of the story.</small>
-        </div>
+  </nav>
+</header>
+<main class="container">
+  <section id="home" class="page-section">
+    <div class="hero">
+      <span class="eyebrow">Welcome to my website</span>
+      <h1>The World According to Jessica</h1>
+      <p>My corner of the internet for programming, projects, interests, achievements, and the things that matter to me.</p>
+      <div class="actions" style="justify-content:center">
+        <a class="button primary" href="#interests">Explore my interests</a>
+        <a class="button" href="#staff">Staff Portal</a>
       </div>
+    </div>
+    <div class="section-heading">
+      <h2>A little about me</h2>
+      <p>I believe in learning, fairness, second chances, and helping people grow.</p>
+    </div>
+    <div class="grid">
+      <article class="card"><h3>Programming</h3><p>I enjoy building websites, bots, APIs, and projects that turn ideas into working solutions.</p></article>
+      <article class="card"><h3>Helping Others</h3><p>Sharing knowledge and helping someone understand something new can make a real difference.</p></article>
+      <article class="card"><h3>Keep Learning</h3><p>Mistakes are part of learning. Progress matters more than getting everything right the first time.</p></article>
+    </div>
+    <section id="values">
+      <div class="section-heading" style="margin-top:48px">
+        <div class="eyebrow">What matters to me</div><h2>My values</h2>
+      </div>
+      <div class="grid">
+        <article class="card"><h3>Second chances</h3><p>People can learn from mistakes and work toward making things right.</p></article>
+        <article class="card"><h3>Fairness</h3><p>Give people a fair opportunity and judge them by what they do.</p></article>
+        <article class="card"><h3>Patience</h3><p>Not everyone learns or grows at the same speed.</p></article>
+        <article class="card"><h3>Honesty</h3><p>Own your mistakes, communicate clearly, and keep learning.</p></article>
+        <article class="card"><h3>Perseverance</h3><p>Keep trying, even when the first attempt doesn't work.</p></article>
+      </div>
+      <div class="notice"><h2>“Fall down 11 times and get up 12 times.”</h2><p>A reminder that setbacks don't have to be the end of the story.</p></div>
     </section>
-
     <section id="interests">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Life beyond the keyboard</div>
-          <h2>Hobbies and <span class="accent">interests.</span></h2>
-          <p>
-            The things I enjoy, the communities I'm part of,
-            and the interests that make life fun.
-          </p>
-        </div>
-
-        <div class="cards">
-          <article class="card">
-            <div class="card-icon">⌨</div>
-            <h3>Programming</h3>
-            <p>Experimenting with code, learning new skills, and building projects.</p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">✦</div>
-            <h3>Star Wars</h3>
-            <p>Exploring a galaxy full of memorable characters, stories, and adventures.</p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">◎</div>
-            <h3>Online Communities</h3>
-            <p>Creating spaces where people can connect, collaborate, and have fun.</p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">↗</div>
-            <h3>Learning New Things</h3>
-            <p>Discovering new ideas and finding better ways to do things.</p>
-          </article>
-        </div>
+      <div class="section-heading" style="margin-top:48px">
+        <div class="eyebrow">Life beyond the keyboard</div><h2>Hobbies and interests</h2>
+        <p>The things I enjoy, the communities I'm part of, and the interests that make life fun.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><h3>Programming</h3><p>Experimenting with code, learning new skills, and building projects.</p></article>
+        <article class="card"><h3>Star Wars</h3><p>Exploring a galaxy full of memorable characters, stories, and adventures.</p></article>
+        <article class="card"><h3>Online Communities</h3><p>Creating spaces where people can connect, collaborate, and have fun.</p></article>
+        <article class="card"><h3>Learning New Things</h3><p>Discovering new ideas and finding better ways to do things.</p></article>
       </div>
     </section>
-
     <section id="achievements">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Things I'm proud of</div>
-          <h2>My <span class="accent">achievements.</span></h2>
-          <p>
-            Achievements aren't just awards. They can also be skills,
-            projects, challenges overcome, and people helped along the way.
-          </p>
-        </div>
-
-        <div class="cards">
-          <article class="card">
-            <div class="card-icon">01</div>
-            <h3>Building Development Projects</h3>
-            <p>
-              Working on bots, websites, APIs, and other programming projects
-              to turn ideas into working solutions.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">02</div>
-            <h3>Developing Coding Standards</h3>
-            <p>
-              Creating developer guidelines, exam questions, grading rubrics,
-              and learning resources through K.C.S.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">03</div>
-            <h3>Helping Others Learn</h3>
-            <p>
-              Sharing knowledge, answering questions, and encouraging
-              people to keep going when learning gets difficult.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">04</div>
-            <h3>What's Next?</h3>
-            <p>
-              This is an ongoing journey. New projects, new skills,
-              and new accomplishments will be added as I grow.
-            </p>
-          </article>
-        </div>
+      <div class="section-heading" style="margin-top:48px">
+        <div class="eyebrow">Things I'm proud of</div><h2>My achievements</h2>
+        <p>Achievements can be skills, projects, challenges overcome, and people helped along the way.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><h3>Development Projects</h3><p>Working on bots, websites, APIs, and other programming projects.</p></article>
+        <article class="card"><h3>K.C.S.</h3><p>Creating developer guidelines, exam questions, grading rubrics, and learning resources.</p></article>
+        <article class="card"><h3>Helping Others Learn</h3><p>Sharing knowledge and encouraging people to keep going when learning gets difficult.</p></article>
+        <article class="card"><h3>What's Next?</h3><p>New projects, new skills, and new accomplishments will be added as I grow.</p></article>
       </div>
     </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="contact-panel">
-          <div class="eyebrow">Let's connect</div>
-          <h2>Want to get in <span class="accent">touch?</span></h2>
-          <p>
-            Have a question about a project, want to talk about programming,
-            or just want to say hello? You can reach out using the contact
-            details I choose to share here.
-          </p>
-
-          <!-- Replace the placeholder with an email you want public. -->
-          <a class="btn btn-primary"
-             href="mailto:Kmartcp@proton.me?subject=Hello%20Jessica">
-            Email me
-          </a>
-
-          <!-- Optional: add public project or social links here. -->
-          <!-- Example: <a href="https://github.com/YOUR-USERNAME">GitHub</a> -->
-        </div>
+    <section id="published-embeds">
+      <div class="section-heading" style="margin-top:48px">
+        <div class="eyebrow">Updates</div><h2>Published posts</h2>
+        <p>Updates and announcements published by authorized staff.</p>
       </div>
+      <div id="public-embeds" class="stack"><p class="muted">Loading published posts…</p></div>
     </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <span>© <span id="year"></span> The World According To Jessica</span>
-      <span>Built with curiosity, code, and a little creativity.</span>
+    <div class="notice" id="contact">
+      <div class="eyebrow">Let's connect</div><h2>Want to get in touch?</h2>
+      <p>Have a question about a project, want to talk about programming, or just want to say hello?</p>
+      <a class="button primary" href="mailto:Kmartcp@proton.me?subject=Hello%20Jessica">Email me</a>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    // Keep the copyright year current.
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+  <section id="staff" class="page-section" hidden>
+    <div class="hero">
+      <span class="eyebrow">Authorized team members</span><h1>Staff Portal</h1>
+      <p>Sign in to manage announcements and rich-style embeds on the website.</p>
+    </div>
+    <div id="login-panel" class="panel" style="max-width:520px;margin:auto">
+      <h2>Staff sign in</h2>
+      <form id="login-form" class="stack">
+        <div><label for="login-email">Email address</label><input id="login-email" type="email" autocomplete="username" required></div>
+        <div><label for="login-password">Password</label><input id="login-password" type="password" autocomplete="current-password" required></div>
+        <button class="button primary" type="submit">Sign in</button>
+        <button class="button" type="button" id="reset-password">Send password reset email</button>
+      </form>
+      <p id="login-status" class="status" role="status"></p>
+      <p class="field-help">Staff accounts are created by the website administrator. Public sign-up is disabled.</p>
+    </div>
+    <div id="dashboard" hidden>
+      <div class="panel" style="margin-bottom:20px">
+        <div class="actions" style="justify-content:space-between">
+          <div><span class="staff-label" id="role-label">Staff</span><p id="signed-in-as" class="muted"></p></div>
+          <button class="button danger" id="sign-out" type="button">Sign out</button>
+        </div>
+      </div>
+      <div class="section-heading"><h2>Embed editor</h2><p>Create announcements, updates, and rich-style content for the public homepage.</p></div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
+        <div class="panel">
+          <h2 id="editor-title">Create an embed</h2>
+          <form id="embed-form" class="stack">
+            <input type="hidden" id="embed-id">
+            <div><label for="embed-heading">Title</label><input id="embed-heading" maxlength="180" required></div>
+            <div><label for="embed-description">Description</label><textarea id="embed-description" maxlength="10000" placeholder="Write your announcement here…"></textarea></div>
+            <div><label for="embed-color">Accent color</label><input id="embed-color" type="color" value="#7c3aed"></div>
+            <div><label for="embed-image">Main image URL (optional)</label><input id="embed-image" type="url" placeholder="https://example.com/image.png"></div>
+            <div><label for="embed-thumbnail">Thumbnail URL (optional)</label><input id="embed-thumbnail" type="url" placeholder="https://example.com/thumb.png"></div>
+            <div><label for="embed-links">Links (optional)</label><textarea id="embed-links" placeholder="Project website | https://example.com&#10;Read more | https://example.com/news"></textarea><p class="field-help">One link per line: Label | https://example.com</p></div>
+            <div><label for="embed-footer">Footer (optional)</label><input id="embed-footer" maxlength="300" placeholder="Posted by the team"></div>
+            <label><input id="embed-timestamp" type="checkbox"> Show published time</label>
+            <label><input id="embed-published" type="checkbox"> Publish on the public homepage</label>
+            <div class="actions"><button class="button primary" type="submit" id="save-embed">Save embed</button><button class="button" type="button" id="clear-editor">Clear form</button></div>
+          </form>
+          <p id="editor-status" class="status" role="status"></p>
+        </div>
+        <div class="panel"><h2>Preview</h2><p class="field-help">Preview of your current form content.</p><div id="embed-preview"></div></div>
+      </div>
+      <div class="section-heading" style="margin-top:36px"><h2>Saved embeds</h2><p>Edit, publish, unpublish, or delete existing posts.</p></div>
+      <div id="staff-embeds" class="stack"><p class="muted">Loading saved embeds…</p></div>
+    </div>
+  </section>
+</main>
+<footer>© <span id="year"></span> The World According to Jessica. Built with curiosity, code, and creativity.</footer>
 
-    // Mobile navigation menu.
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
 
-    menuToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation menu" : "Open navigation menu"
-      );
-      menuToggle.textContent = isOpen ? "✕ Close" : "☰ Menu";
-    });
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-    // Close the mobile menu after a navigation link is selected.
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open navigation menu");
-        menuToggle.textContent = "☰ Menu";
-      });
-    });
-  </script>
+const SUPABASE_URL = "https://gwzrirmrphbzfrfpdesz.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_CDY_dDjP45-F6I1OWT9fPQ_IbcQAny4";
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+let currentUser = null;
+let currentRole = null;
+let editingEmbedId = null;
+let embeds = [];
+
+function setMessage(selector, message, isError = false) {
+  const element = $(selector);
+  if (!element) return;
+  element.textContent = message;
+  element.style.color = isError ? "#ff8585" : "#9fe6b8";
+}
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function showPage(page) {
+  const target = page === "staff" ? "staff" : "home";
+
+  $$("[data-page-content]").forEach((section) => {
+    section.hidden = section.dataset.pageContent !== target;
+  });
+
+  $$("[data-page]").forEach((link) => {
+    link.classList.toggle("active", link.dataset.page === target);
+  });
+
+  if (target === "staff") {
+    window.location.hash = "staff";
+  } else {
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  }
+}
+
+$$("[data-page]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    showPage(link.dataset.page);
+  });
+});
+
+window.addEventListener("hashchange", () => {
+  showPage(window.location.hash === "#staff" ? "staff" : "home");
+});
+
+$("#year").textContent = new Date().getFullYear();
+
+function renderLinks(links) {
+  if (!Array.isArray(links)) return "";
+
+  return links.map((link) => {
+    if (!link || !link.label || !link.url) return "";
+    let url;
+
+    try {
+      url = new URL(link.url);
+    } catch {
+      return "";
+    }
+
+    if (!["http:", "https:"].includes(url.protocol)) return "";
+
+    return `<a class="button secondary" href="${escapeHtml(url.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`;
+  }).join("");
+}
+
+function renderEmbed(embed) {
+  const card = document.createElement("article");
+  card.className = "card embed-card";
+  card.style.borderTop = `4px solid ${/^#[0-9a-f]{6}$/i.test(embed.color || "") ? embed.color : "#8b5cf6"}`;
+
+  const title = document.createElement("h3");
+  title.textContent = embed.title || "Untitled embed";
+
+  const description = document.createElement("p");
+  description.textContent = embed.description || "";
+
+  card.append(title, description);
+
+  if (embed.image_url) {
+    try {
+      const imageUrl = new URL(embed.image_url);
+      if (["https:", "http:"].includes(imageUrl.protocol)) {
+        const image = document.createElement("img");
+        image.src = imageUrl.href;
+        image.alt = embed.title || "Embed image";
+        image.loading = "lazy";
+        image.className = "embed-image";
+        image.onerror = () => image.remove();
+        card.append(image);
+      }
+    } catch {}
+  }
+
+  if (embed.thumbnail_url) {
+    try {
+      const thumbnailUrl = new URL(embed.thumbnail_url);
+      if (["https:", "http:"].includes(thumbnailUrl.protocol)) {
+        const thumbnail = document.createElement("img");
+        thumbnail.src = thumbnailUrl.href;
+        thumbnail.alt = "Embed thumbnail";
+        thumbnail.loading = "lazy";
+        thumbnail.className = "embed-thumbnail";
+        thumbnail.onerror = () => thumbnail.remove();
+        card.append(thumbnail);
+      }
+    } catch {}
+  }
+
+  const links = document.createElement("div");
+  links.className = "embed-links";
+  links.innerHTML = renderLinks(embed.links);
+  card.append(links);
+
+  if (embed.footer) {
+    const footer = document.createElement("small");
+    footer.textContent = embed.footer;
+    card.append(footer);
+  }
+
+  if (embed.show_timestamp && embed.created_at) {
+    const time = document.createElement("small");
+    time.textContent = new Date(embed.created_at).toLocaleString();
+    card.append(time);
+  }
+
+  return card;
+}
+
+async function loadPublishedEmbeds() {
+  const container = $("#published-embeds");
+  if (!container) return;
+
+  const { data, error } = await supabase
+    .from("embeds")
+    .select("*")
+    .eq("published", true)
+    .order("created_at", { ascending: false });
+
+  container.replaceChildren();
+
+  if (error) {
+    const message = document.createElement("p");
+    message.textContent = "Published updates could not be loaded. Check your Supabase table and policies.";
+    container.append(message);
+    console.error("Loading published embeds:", error.message);
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    const message = document.createElement("p");
+    message.textContent = "No updates have been published yet. Check back soon!";
+    container.append(message);
+    return;
+  }
+
+  data.forEach((embed) => container.append(renderEmbed(embed)));
+}
+
+function showSignedOut() {
+  $("#staff-login").hidden = false;
+  $("#staff-dashboard").hidden = true;
+  $("#staff-status").textContent = "Sign in with your approved staff account.";
+}
+
+function showSignedIn() {
+  $("#staff-login").hidden = true;
+  $("#staff-dashboard").hidden = false;
+  $("#staff-status").textContent = `Signed in as ${currentUser.email} (${currentRole}).`;
+}
+
+async function checkStaff() {
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    currentUser = null;
+    currentRole = null;
+    showSignedOut();
+    return;
+  }
+
+  currentUser = user;
+
+  const { data, error } = await supabase
+    .from("staff_members")
+    .select("role")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error || !data) {
+    await supabase.auth.signOut();
+    currentUser = null;
+    currentRole = null;
+    showSignedOut();
+    setMessage("#login-message", "This account is not approved for staff access.", true);
+    return;
+  }
+
+  currentRole = data.role;
+  showSignedIn();
+  await loadStaffEmbeds();
+}
+
+$("#login-form")?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  setMessage("#login-message", "Signing in...");
+
+  const email = $("#login-email").value.trim();
+  const password = $("#login-password").value;
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    setMessage("#login-message", error.message, true);
+    return;
+  }
+
+  $("#login-password").value = "";
+  setMessage("#login-message", "Signed in. Checking staff permissions...");
+  await checkStaff();
+});
+
+$("#forgot-password")?.addEventListener("click", async () => {
+  const email = $("#login-email").value.trim();
+
+  if (!email) {
+    setMessage("#login-message", "Enter your email address first.", true);
+    return;
+  }
+
+  const redirectTo = window.location.origin + window.location.pathname;
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo
+  });
+
+  if (error) {
+    setMessage("#login-message", error.message, true);
+  } else {
+    setMessage("#login-message", "If that account exists, a password reset email has been sent.");
+  }
+});
+
+$("#sign-out")?.addEventListener("click", async () => {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    setMessage("#staff-message", error.message, true);
+    return;
+  }
+
+  currentUser = null;
+  currentRole = null;
+  showSignedOut();
+  setMessage("#login-message", "You have signed out.");
+});
+
+function readLinks() {
+  const raw = $("#embed-links").value.trim();
+  if (!raw) return [];
+
+  return raw.split("\n").map((line) => {
+    const separator = line.indexOf("|");
+
+    if (separator < 1) {
+      throw new Error("Each link must use this format: Label | https://example.com");
+    }
+
+    const label = line.slice(0, separator).trim();
+    const url = line.slice(separator + 1).trim();
+
+    let parsed;
+    try {
+      parsed = new URL(url);
+    } catch {
+      throw new Error(`The URL for "${label}" is not valid.`);
+    }
+
+    if (!label || !["http:", "https:"].includes(parsed.protocol)) {
+      throw new Error("Links must have a label and an HTTP or HTTPS URL.");
+    }
+
+    return { label, url: parsed.href };
+  });
+}
+
+function resetEmbedForm() {
+  editingEmbedId = null;
+  $("#embed-form").reset();
+  $("#embed-form-heading").textContent = "Create an embed";
+  $("#save-embed").textContent = "Save embed";
+  $("#cancel-edit").hidden = true;
+  updatePreview();
+}
+
+function fillEmbedForm(embed) {
+  editingEmbedId = embed.id;
+  $("#embed-title").value = embed.title || "";
+  $("#embed-description").value = embed.description || "";
+  $("#embed-color").value = /^#[0-9a-f]{6}$/i.test(embed.color || "") ? embed.color : "#8b5cf6";
+  $("#embed-image").value = embed.image_url || "";
+  $("#embed-thumbnail").value = embed.thumbnail_url || "";
+  $("#embed-footer").value = embed.footer || "";
+  $("#embed-timestamp").checked = Boolean(embed.show_timestamp);
+  $("#embed-links").value = Array.isArray(embed.links)
+    ? embed.links.map((link) => `${link.label} | ${link.url}`).join("\n")
+    : "";
+  $("#embed-form-heading").textContent = "Edit embed";
+  $("#save-embed").textContent = "Update embed";
+  $("#cancel-edit").hidden = false;
+  updatePreview();
+  $("#embed-form-heading").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function updatePreview() {
+  const preview = $("#embed-preview");
+  if (!preview) return;
+
+  const draft = {
+    title: $("#embed-title")?.value || "Your embed title",
+    description: $("#embed-description")?.value || "Your embed description will appear here.",
+    color: $("#embed-color")?.value || "#8b5cf6",
+    image_url: $("#embed-image")?.value || "",
+    thumbnail_url: $("#embed-thumbnail")?.value || "",
+    footer: $("#embed-footer")?.value || "",
+    show_timestamp: $("#embed-timestamp")?.checked || false,
+    created_at: new Date().toISOString(),
+    links: []
+  };
+
+  try {
+    draft.links = readLinks();
+  } catch {}
+
+  preview.replaceChildren(renderEmbed(draft));
+}
+
+[
+  "#embed-title",
+  "#embed-description",
+  "#embed-color",
+  "#embed-image",
+  "#embed-thumbnail",
+  "#embed-footer",
+  "#embed-links",
+  "#embed-timestamp"
+].forEach((selector) => {
+  $(selector)?.addEventListener("input", updatePreview);
+  $(selector)?.addEventListener("change", updatePreview);
+});
+
+async function loadStaffEmbeds() {
+  const container = $("#staff-embed-list");
+  if (!container) return;
+
+  const { data, error } = await supabase
+    .from("embeds")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    container.textContent = "Could not load embeds: " + error.message;
+    return;
+  }
+
+  embeds = data || [];
+  container.replaceChildren();
+
+  if (!embeds.length) {
+    container.textContent = "No embeds yet. Create your first one below.";
+    return;
+  }
+
+  embeds.forEach((embed) => {
+    const row = document.createElement("div");
+    row.className = "staff-embed-row";
+
+    const info = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = embed.title || "Untitled embed";
+
+    const status = document.createElement("p");
+    status.textContent = embed.published ? "Published" : "Draft";
+
+    info.append(title, status);
+
+    const actions = document.createElement("div");
+    actions.className = "staff-embed-actions";
+
+    const edit = document.createElement("button");
+    edit.type = "button";
+    edit.className = "button secondary";
+    edit.textContent = "Edit";
+    edit.addEventListener("click", () => fillEmbedForm(embed));
+
+    const publish = document.createElement("button");
+    publish.type = "button";
+    publish.className = "button secondary";
+    publish.textContent = embed.published ? "Unpublish" : "Publish";
+    publish.addEventListener("click", () => togglePublished(embed));
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "button danger";
+    remove.textContent = "Delete";
+    remove.addEventListener("click", () => deleteEmbed(embed));
+
+    actions.append(edit, publish, remove);
+    row.append(info, actions);
+    container.append(row);
+  });
+}
+
+$("#embed-form")?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  if (!currentUser || !currentRole) {
+    setMessage("#staff-message", "Please sign in with an approved staff account.", true);
+    return;
+  }
+
+  let links;
+  try {
+    links = readLinks();
+  } catch (error) {
+    setMessage("#staff-message", error.message, true);
+    return;
+  }
+
+  const payload = {
+    title: $("#embed-title").value.trim(),
+    description: $("#embed-description").value.trim(),
+    color: $("#embed-color").value,
+    image_url: $("#embed-image").value.trim() || null,
+    thumbnail_url: $("#embed-thumbnail").value.trim() || null,
+    footer: $("#embed-footer").value.trim() || null,
+    show_timestamp: $("#embed-timestamp").checked,
+    links,
+    updated_at: new Date().toISOString()
+  };
+
+  if (!payload.title) {
+    setMessage("#staff-message", "Please enter an embed title.", true);
+    return;
+  }
+
+  if (!/^#[0-9a-f]{6}$/i.test(payload.color)) {
+    setMessage("#staff-message", "Choose a valid six-digit hex color.", true);
+    return;
+  }
+
+  for (const field of ["image_url", "thumbnail_url"]) {
+    if (!payload[field]) continue;
+
+    try {
+      const url = new URL(payload[field]);
+      if (!["http:", "https:"].includes(url.protocol)) {
+        throw new Error();
+      }
+    } catch {
+      setMessage("#staff-message", `Please enter a valid HTTP or HTTPS URL for ${field === "image_url" ? "the image" : "the thumbnail"}.`, true);
+      return;
+    }
+  }
+
+  setMessage("#staff-message", "Saving embed...");
+
+  let result;
+
+  if (editingEmbedId) {
+    result = await supabase
+      .from("embeds")
+      .update(payload)
+      .eq("id", editingEmbedId)
+      .select()
+      .single();
+  } else {
+    result = await supabase
+      .from("embeds")
+      .insert({
+        ...payload,
+        published: false,
+        created_by: currentUser.id
+      })
+      .select()
+      .single();
+  }
+
+  if (result.error) {
+    setMessage("#staff-message", "Could not save embed: " + result.error.message, true);
+    return;
+  }
+
+  setMessage("#staff-message", "Embed saved successfully.");
+  resetEmbedForm();
+  await loadStaffEmbeds();
+});
+
+$("#cancel-edit")?.addEventListener("click", resetEmbedForm);
+
+async function togglePublished(embed) {
+  const { error } = await supabase
+    .from("embeds")
+    .update({
+      published: !embed.published,
+      updated_at: new Date().toISOString()
+    })
+    .eq("id", embed.id);
+
+  if (error) {
+    setMessage("#staff-message", "Could not update publication status: " + error.message, true);
+    return;
+  }
+
+  setMessage("#staff-message", embed.published ? "Embed unpublished." : "Embed published.");
+  await loadStaffEmbeds();
+  await loadPublishedEmbeds();
+}
+
+async function deleteEmbed(embed) {
+  if (!window.confirm(`Delete "${embed.title}" permanently?`)) return;
+
+  const { error } = await supabase
+    .from("embeds")
+    .delete()
+    .eq("id", embed.id);
+
+  if (error) {
+    setMessage("#staff-message", "Could not delete embed: " + error.message, true);
+    return;
+  }
+
+  if (editingEmbedId === embed.id) resetEmbedForm();
+
+  setMessage("#staff-message", "Embed deleted.");
+  await loadStaffEmbeds();
+  await loadPublishedEmbeds();
+}
+
+async function startApp() {
+  showPage(window.location.hash === "#staff" ? "staff" : "home");
+  await loadPublishedEmbeds();
+  await checkStaff();
+
+  supabase.auth.onAuthStateChange(() => {
+    setTimeout(() => {
+      checkStaff();
+      loadPublishedEmbeds();
+    }, 0);
+  });
+}
+
+startApp().catch((error) => {
+  console.error("Website startup error:", error);
+  setMessage("#staff-message", "The website encountered an error. Check the browser console.", true);
+});
+</script>
+
+
+<!-- Final website startup and navigation checks -->
+<script>
+  // Keep the page navigation working when the site opens directly at #staff.
+  window.addEventListener("DOMContentLoaded", () => {
+    const staffLink = document.querySelector('[data-page="staff"]');
+
+    if (window.location.hash === "#staff" && staffLink) {
+      staffLink.classList.add("active");
+    }
+  });
+</script>
+
 </body>
 </html>
