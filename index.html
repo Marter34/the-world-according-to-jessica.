@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101426">
-  <meta name="description" content="The World According to Jessica — personal website, projects, and staff portal.">
+  <meta name="description" content="The World According to Jessica — programming, projects, interests, and updates.">
   <title>The World According to Jessica</title>
+
   <style>
     :root {
       color-scheme: dark;
@@ -18,141 +19,303 @@
       --accent: #b5a0ff;
       --border: #343d5d;
       --danger: #ff9baf;
+      --success: #a7efc0;
       --radius: 18px;
     }
+
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 95px;
+    }
+
     body {
-      margin: 0; min-height: 100vh; color: var(--text);
-      background: radial-gradient(ellipse at top,#29244e 0%,transparent 55%),var(--bg);
-      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at top, #29244e 0%, transparent 55%),
+        var(--bg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.7;
     }
+
     a { color: var(--accent); overflow-wrap: anywhere; }
-    button,input,textarea,select { font: inherit; }
-    button,a { -webkit-tap-highlight-color: transparent; }
+    button, input, textarea, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
     button { cursor: pointer; }
-    .container { width: min(100% - 32px,1000px); margin-inline: auto; }
+
+    .container {
+      width: min(100% - 32px, 1000px);
+      margin-inline: auto;
+    }
+
     header {
-      position: sticky; top: 0; z-index: 5;
-      background: rgba(16,20,38,.96); border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(16, 20, 38, .96);
+      border-bottom: 1px solid var(--border);
       backdrop-filter: blur(12px);
     }
+
     nav {
-      min-height: 72px; display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 12px; padding-block: 12px;
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-block: 12px;
     }
-    .brand { color: var(--text); font-weight: 800; text-decoration: none; }
-    .nav-links,.actions {
-      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
-    }
-    .nav-link,.button {
-      display: inline-flex; align-items: center; justify-content: center;
-      gap: 6px; min-height: 43px; padding: 9px 15px;
-      border: 1px solid var(--border); border-radius: 11px;
-      background: var(--panel); color: var(--text); font-weight: 700;
+
+    .brand {
+      color: var(--text);
+      font-weight: 800;
       text-decoration: none;
     }
-    .nav-link { border-color: transparent; }
-    .nav-link.active,.nav-link:hover,.button:hover {
-      background: var(--hover); border-color: var(--border);
+
+    .nav-links, .actions, .embed-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
     }
-    .button.primary { background: var(--accent); border-color: var(--accent); color: #19132d; }
-    .button.danger { color: var(--danger); border-color: #704050; }
+
+    .nav-link, .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 43px;
+      padding: 9px 15px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--panel);
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-link { border-color: transparent; }
+
+    .nav-link.active, .nav-link:hover, .button:hover {
+      background: var(--hover);
+      border-color: var(--border);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #19132d;
+    }
+
+    .button.danger {
+      color: var(--danger);
+      border-color: #704050;
+    }
+
     button:disabled { opacity: .55; cursor: not-allowed; }
+
     main { min-height: 75vh; }
-    .page-section { padding-block: 48px 75px; animation: appear .2s ease-out; }
-    .page-section[hidden],[hidden] { display: none !important; }
+
+    .page-section {
+      padding-block: 42px 75px;
+      animation: appear .2s ease-out;
+    }
+
+    .page-section[hidden], [hidden] {
+      display: none !important;
+    }
+
     @keyframes appear {
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .hero,.section-heading { text-align: center; }
+
+    .hero, .section-heading { text-align: center; }
     .hero { padding-block: 30px 45px; }
+
     .eyebrow {
-      color: var(--accent); font-size: .8rem; font-weight: 800;
-      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
     }
-    h1 { font-size: clamp(2.2rem,7vw,4.1rem); line-height: 1.12; letter-spacing: -.04em; overflow-wrap: anywhere; }
+
+    h1 {
+      font-size: clamp(2.2rem, 7vw, 4.1rem);
+      line-height: 1.12;
+      letter-spacing: -.04em;
+      overflow-wrap: anywhere;
+    }
+
     h2 { line-height: 1.25; }
-    .hero p,.section-heading p { max-width: 680px; margin-inline: auto; color: var(--muted); }
     .section-heading { margin-bottom: 25px; }
+
+    .hero p, .section-heading p {
+      max-width: 680px;
+      margin-inline: auto;
+      color: var(--muted);
+    }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(min(100%,240px),1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
       gap: 16px;
     }
-    .card,.panel {
-      min-width: 0; padding: 22px; background: var(--panel);
-      border: 1px solid var(--border); border-radius: var(--radius);
+
+    .card, .panel {
+      min-width: 0;
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
     }
+
     .card h3 { margin-top: 0; }
-    .card p,.muted { color: var(--muted); }
+    .card p, .muted, .field-help { color: var(--muted); }
+
     .notice {
-      margin-top: 24px; padding: 22px; background: rgba(181,160,255,.07);
-      border: 1px solid var(--border); border-radius: var(--radius);
+      margin-top: 24px;
+      padding: 22px;
+      background: rgba(181, 160, 255, .07);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
     }
+
     .notice p { color: var(--muted); }
-    .staff-label {
-      display: inline-block; padding: 3px 10px; margin-bottom: 8px;
-      border: 1px solid var(--border); border-radius: 999px;
-      color: var(--accent); font-size: .8rem; font-weight: 750;
-    }
+
     .stack { display: grid; gap: 14px; }
-    label { display: block; margin-bottom: 5px; font-size: .92rem; font-weight: 700; }
-    input,textarea,select {
-      width: 100%; min-width: 0; padding: 11px 12px; color: var(--text);
-      background: #101426; border: 1px solid var(--border); border-radius: 10px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .92rem;
+      font-weight: 700;
     }
+
+    input, textarea, select {
+      width: 100%;
+      min-width: 0;
+      padding: 11px 12px;
+      color: var(--text);
+      background: #101426;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
     textarea { min-height: 110px; resize: vertical; }
     input[type="color"] { width: 65px; height: 45px; padding: 3px; }
     input[type="checkbox"] { width: auto; }
-    .field-help { color: var(--muted); font-size: .85rem; }
-    .status { min-height: 24px; margin-block: 12px; overflow-wrap: anywhere; }
-    .status.error { color: var(--danger); }
-    .status.success { color: #a7efc0; }
-    .embed-preview {
-      overflow: hidden; border: 1px solid var(--border);
-      border-left: 5px solid var(--embed-color,var(--accent));
-      border-radius: 12px; background: #12172a;
+    .field-help { font-size: .85rem; }
+
+    .status {
+      min-height: 24px;
+      margin-block: 12px;
+      overflow-wrap: anywhere;
     }
+
+    .status.error { color: var(--danger); }
+    .status.success { color: var(--success); }
+
+    .staff-label {
+      display: inline-block;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 750;
+    }
+
+    .embed-preview {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--embed-color, var(--accent));
+      border-radius: 12px;
+      background: #12172a;
+    }
+
     .embed-content { padding: 18px; }
     .embed-content h3 { margin: 0 0 8px; }
     .embed-content p { white-space: pre-wrap; overflow-wrap: anywhere; }
+
     .embed-image {
-      display: block; max-width: 100%; max-height: 350px;
-      margin-top: 12px; border-radius: 8px; object-fit: contain;
+      display: block;
+      max-width: 100%;
+      max-height: 350px;
+      margin-top: 12px;
+      border-radius: 8px;
+      object-fit: contain;
     }
+
     .embed-thumb {
-      float: right; max-width: 90px; max-height: 90px;
-      margin: 0 0 10px 12px; border-radius: 8px; object-fit: cover;
+      float: right;
+      max-width: 90px;
+      max-height: 90px;
+      margin: 0 0 10px 12px;
+      border-radius: 8px;
+      object-fit: cover;
     }
-    .embed-links { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .embed-links { margin-top: 12px; }
+
     .embed-links a {
-      padding: 6px 10px; border: 1px solid var(--border);
-      border-radius: 8px; text-decoration: none;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
     }
+
     .embed-footer {
-      margin-top: 16px; padding-top: 10px; border-top: 1px solid var(--border);
-      color: var(--muted); font-size: .85rem;
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .85rem;
     }
-    .embed-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+    .embed-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .embed-actions .button { min-height: 38px; }
+
     footer {
-      padding-block: 24px; border-top: 1px solid var(--border);
-      color: var(--muted); text-align: center; font-size: .9rem;
+      padding-block: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: .9rem;
     }
-    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-    @media (max-width:560px) {
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 560px) {
       nav { justify-content: center; }
       .brand { text-align: center; }
       .nav-links { justify-content: center; }
       .page-section { padding-block: 30px 55px; }
     }
-    @media (prefers-reduced-motion:reduce) {
-      *,*::before,*::after { animation: none !important; scroll-behavior: auto !important; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
+
 <body>
 <header>
   <nav class="container" aria-label="Main navigation">
@@ -163,29 +326,36 @@
     </div>
   </nav>
 </header>
+
 <main class="container">
-  <section id="home" class="page-section">
+
+  <!-- HOME PAGE -->
+  <section id="home" class="page-section" data-page-content="home">
     <div class="hero">
       <span class="eyebrow">Welcome to my website</span>
       <h1>The World According to Jessica</h1>
       <p>My corner of the internet for programming, projects, interests, achievements, and the things that matter to me.</p>
       <div class="actions" style="justify-content:center">
         <a class="button primary" href="#interests">Explore my interests</a>
-        <a class="button" href="#staff">Staff Portal</a>
+        <a class="button" href="#staff" data-page="staff">Staff Portal</a>
       </div>
     </div>
+
     <div class="section-heading">
       <h2>A little about me</h2>
       <p>I believe in learning, fairness, second chances, and helping people grow.</p>
     </div>
+
     <div class="grid">
       <article class="card"><h3>Programming</h3><p>I enjoy building websites, bots, APIs, and projects that turn ideas into working solutions.</p></article>
       <article class="card"><h3>Helping Others</h3><p>Sharing knowledge and helping someone understand something new can make a real difference.</p></article>
       <article class="card"><h3>Keep Learning</h3><p>Mistakes are part of learning. Progress matters more than getting everything right the first time.</p></article>
     </div>
+
     <section id="values">
       <div class="section-heading" style="margin-top:48px">
-        <div class="eyebrow">What matters to me</div><h2>My values</h2>
+        <div class="eyebrow">What matters to me</div>
+        <h2>My values</h2>
       </div>
       <div class="grid">
         <article class="card"><h3>Second chances</h3><p>People can learn from mistakes and work toward making things right.</p></article>
@@ -194,11 +364,16 @@
         <article class="card"><h3>Honesty</h3><p>Own your mistakes, communicate clearly, and keep learning.</p></article>
         <article class="card"><h3>Perseverance</h3><p>Keep trying, even when the first attempt doesn't work.</p></article>
       </div>
-      <div class="notice"><h2>“Fall down 11 times and get up 12 times.”</h2><p>A reminder that setbacks don't have to be the end of the story.</p></div>
+      <div class="notice">
+        <h2>“Fall down 11 times and get up 12 times.”</h2>
+        <p>A reminder that setbacks don't have to be the end of the story.</p>
+      </div>
     </section>
+
     <section id="interests">
       <div class="section-heading" style="margin-top:48px">
-        <div class="eyebrow">Life beyond the keyboard</div><h2>Hobbies and interests</h2>
+        <div class="eyebrow">Life beyond the keyboard</div>
+        <h2>Hobbies and interests</h2>
         <p>The things I enjoy, the communities I'm part of, and the interests that make life fun.</p>
       </div>
       <div class="grid">
@@ -208,9 +383,11 @@
         <article class="card"><h3>Learning New Things</h3><p>Discovering new ideas and finding better ways to do things.</p></article>
       </div>
     </section>
+
     <section id="achievements">
       <div class="section-heading" style="margin-top:48px">
-        <div class="eyebrow">Things I'm proud of</div><h2>My achievements</h2>
+        <div class="eyebrow">Things I'm proud of</div>
+        <h2>My achievements</h2>
         <p>Achievements can be skills, projects, challenges overcome, and people helped along the way.</p>
       </div>
       <div class="grid">
@@ -220,69 +397,139 @@
         <article class="card"><h3>What's Next?</h3><p>New projects, new skills, and new accomplishments will be added as I grow.</p></article>
       </div>
     </section>
-    <section id="published-embeds">
+
+    <section id="published-section">
       <div class="section-heading" style="margin-top:48px">
-        <div class="eyebrow">Updates</div><h2>Published posts</h2>
+        <div class="eyebrow">Updates</div>
+        <h2>Published posts</h2>
         <p>Updates and announcements published by authorized staff.</p>
       </div>
-      <div id="public-embeds" class="stack"><p class="muted">Loading published posts…</p></div>
+      <div id="public-embeds" class="stack">
+        <p class="muted">Loading published posts…</p>
+      </div>
     </section>
+
     <div class="notice" id="contact">
-      <div class="eyebrow">Let's connect</div><h2>Want to get in touch?</h2>
+      <div class="eyebrow">Let's connect</div>
+      <h2>Want to get in touch?</h2>
       <p>Have a question about a project, want to talk about programming, or just want to say hello?</p>
       <a class="button primary" href="mailto:Kmartcp@proton.me?subject=Hello%20Jessica">Email me</a>
     </div>
   </section>
 
-  <section id="staff" class="page-section" hidden>
+  <!-- SEPARATE STAFF PAGE -->
+  <section id="staff" class="page-section" data-page-content="staff" hidden>
     <div class="hero">
-      <span class="eyebrow">Authorized team members</span><h1>Staff Portal</h1>
-      <p>Sign in to manage announcements and rich-style embeds on the website.</p>
+      <span class="eyebrow">Authorized team members</span>
+      <h1>Staff Portal</h1>
+      <p>Sign in to manage announcements and posts on the public website.</p>
     </div>
+
     <div id="login-panel" class="panel" style="max-width:520px;margin:auto">
       <h2>Staff sign in</h2>
       <form id="login-form" class="stack">
-        <div><label for="login-email">Email address</label><input id="login-email" type="email" autocomplete="username" required></div>
-        <div><label for="login-password">Password</label><input id="login-password" type="password" autocomplete="current-password" required></div>
+        <div>
+          <label for="login-email">Email address</label>
+          <input id="login-email" type="email" autocomplete="username" required>
+        </div>
+        <div>
+          <label for="login-password">Password</label>
+          <input id="login-password" type="password" autocomplete="current-password" required>
+        </div>
         <button class="button primary" type="submit">Sign in</button>
         <button class="button" type="button" id="reset-password">Send password reset email</button>
       </form>
       <p id="login-status" class="status" role="status"></p>
-      <p class="field-help">Staff accounts are created by the website administrator. Public sign-up is disabled.</p>
+      <p class="field-help">Staff accounts must be approved by the website administrator. Public sign-up is disabled.</p>
     </div>
+
     <div id="dashboard" hidden>
       <div class="panel" style="margin-bottom:20px">
         <div class="actions" style="justify-content:space-between">
-          <div><span class="staff-label" id="role-label">Staff</span><p id="signed-in-as" class="muted"></p></div>
+          <div>
+            <span class="staff-label" id="role-label">Staff</span>
+            <p id="signed-in-as" class="muted"></p>
+          </div>
           <button class="button danger" id="sign-out" type="button">Sign out</button>
         </div>
       </div>
-      <div class="section-heading"><h2>Embed editor</h2><p>Create announcements, updates, and rich-style content for the public homepage.</p></div>
+
+      <div class="section-heading">
+        <h2>Embed editor</h2>
+        <p>Create announcements, updates, and rich-style content for the public homepage.</p>
+      </div>
+
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
         <div class="panel">
           <h2 id="editor-title">Create an embed</h2>
           <form id="embed-form" class="stack">
             <input type="hidden" id="embed-id">
-            <div><label for="embed-heading">Title</label><input id="embed-heading" maxlength="180" required></div>
-            <div><label for="embed-description">Description</label><textarea id="embed-description" maxlength="10000" placeholder="Write your announcement here…"></textarea></div>
-            <div><label for="embed-color">Accent color</label><input id="embed-color" type="color" value="#7c3aed"></div>
-            <div><label for="embed-image">Main image URL (optional)</label><input id="embed-image" type="url" placeholder="https://example.com/image.png"></div>
-            <div><label for="embed-thumbnail">Thumbnail URL (optional)</label><input id="embed-thumbnail" type="url" placeholder="https://example.com/thumb.png"></div>
-            <div><label for="embed-links">Links (optional)</label><textarea id="embed-links" placeholder="Project website | https://example.com&#10;Read more | https://example.com/news"></textarea><p class="field-help">One link per line: Label | https://example.com</p></div>
-            <div><label for="embed-footer">Footer (optional)</label><input id="embed-footer" maxlength="300" placeholder="Posted by the team"></div>
+
+            <div>
+              <label for="embed-heading">Title</label>
+              <input id="embed-heading" maxlength="180" required>
+            </div>
+
+            <div>
+              <label for="embed-description">Description</label>
+              <textarea id="embed-description" maxlength="10000" placeholder="Write your announcement here…"></textarea>
+            </div>
+
+            <div>
+              <label for="embed-color">Accent color</label>
+              <input id="embed-color" type="color" value="#b5a0ff">
+            </div>
+
+            <div>
+              <label for="embed-image">Main image URL (optional)</label>
+              <input id="embed-image" type="url" placeholder="https://example.com/image.png">
+            </div>
+
+            <div>
+              <label for="embed-thumbnail">Thumbnail URL (optional)</label>
+              <input id="embed-thumbnail" type="url" placeholder="https://example.com/thumb.png">
+            </div>
+
+            <div>
+              <label for="embed-links">Links (optional)</label>
+              <textarea id="embed-links" placeholder="Project website | https://example.com&#10;Read more | https://example.com/news"></textarea>
+              <p class="field-help">One link per line: Label | https://example.com</p>
+            </div>
+
+            <div>
+              <label for="embed-footer">Footer (optional)</label>
+              <input id="embed-footer" maxlength="300" placeholder="Posted by the team">
+            </div>
+
             <label><input id="embed-timestamp" type="checkbox"> Show published time</label>
             <label><input id="embed-published" type="checkbox"> Publish on the public homepage</label>
-            <div class="actions"><button class="button primary" type="submit" id="save-embed">Save embed</button><button class="button" type="button" id="clear-editor">Clear form</button></div>
+
+            <div class="actions">
+              <button class="button primary" type="submit" id="save-embed">Save embed</button>
+              <button class="button" type="button" id="clear-editor">Clear form</button>
+            </div>
           </form>
           <p id="editor-status" class="status" role="status"></p>
         </div>
-        <div class="panel"><h2>Preview</h2><p class="field-help">Preview of your current form content.</p><div id="embed-preview"></div></div>
+
+        <div class="panel">
+          <h2>Preview</h2>
+          <p class="field-help">Preview your current content before saving.</p>
+          <div id="embed-preview"></div>
+        </div>
       </div>
-      <div class="section-heading" style="margin-top:36px"><h2>Saved embeds</h2><p>Edit, publish, unpublish, or delete existing posts.</p></div>
-      <div id="staff-embeds" class="stack"><p class="muted">Loading saved embeds…</p></div>
+
+      <div class="section-heading" style="margin-top:36px">
+        <h2>Saved embeds</h2>
+        <p>Edit, publish, unpublish, or delete existing posts.</p>
+      </div>
+      <div id="staff-embeds" class="stack">
+        <p class="muted">Loading saved embeds…</p>
+      </div>
     </div>
   </section>
 </main>
+
 <footer>© <span id="year"></span> The World According to Jessica. Built with curiosity, code, and creativity.</footer>
 
 
@@ -292,149 +539,295 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const SUPABASE_URL = "https://gwzrirmrphbzfrfpdesz.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_CDY_dDjP45-F6I1OWT9fPQ_IbcQAny4";
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
 let currentUser = null;
 let currentRole = null;
-let editingEmbedId = null;
-let embeds = [];
+let savedEmbeds = [];
 
-function setMessage(selector, message, isError = false) {
+function setStatus(selector, message, isError = false) {
   const element = $(selector);
   if (!element) return;
+
   element.textContent = message;
-  element.style.color = isError ? "#ff8585" : "#9fe6b8";
+  element.style.color = isError ? "#dc2626" : "";
 }
 
-function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
+function safeUrl(value) {
+  if (!value || typeof value !== "string") return "";
+
+  try {
+    const url = new URL(value.trim());
+
+    if (url.protocol === "https:" || url.protocol === "http:") {
+      return url.href;
+    }
+  } catch {
+    return "";
+  }
+
+  return "";
 }
 
-function showPage(page) {
-  const target = page === "staff" ? "staff" : "home";
+function showPage(page, updateHash = true) {
+  const selected = page === "staff" ? "staff" : "home";
 
   $$("[data-page-content]").forEach((section) => {
-    section.hidden = section.dataset.pageContent !== target;
+    const active = section.dataset.pageContent === selected;
+    section.hidden = !active;
+    section.style.display = active ? "" : "none";
   });
 
   $$("[data-page]").forEach((link) => {
-    link.classList.toggle("active", link.dataset.page === target);
+    const active = link.dataset.page === selected;
+    link.classList.toggle("active", active);
+
+    if (active) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
   });
 
-  if (target === "staff") {
-    window.location.hash = "staff";
-  } else {
-    history.replaceState(null, "", window.location.pathname + window.location.search);
+  if (updateHash && location.hash !== `#${selected}`) {
+    history.replaceState(null, "", `#${selected}`);
   }
+
+  window.scrollTo(0, 0);
 }
 
 $$("[data-page]").forEach((link) => {
   link.addEventListener("click", (event) => {
+    const page = link.dataset.page;
+
+    if (page !== "home" && page !== "staff") return;
+
     event.preventDefault();
-    showPage(link.dataset.page);
+    showPage(page);
   });
 });
 
 window.addEventListener("hashchange", () => {
-  showPage(window.location.hash === "#staff" ? "staff" : "home");
+  showPage(
+    location.hash.replace("#", "") === "staff" ? "staff" : "home",
+    false
+  );
 });
 
-$("#year").textContent = new Date().getFullYear();
-
-function renderLinks(links) {
-  if (!Array.isArray(links)) return "";
-
-  return links.map((link) => {
-    if (!link || !link.label || !link.url) return "";
-    let url;
-
-    try {
-      url = new URL(link.url);
-    } catch {
-      return "";
-    }
-
-    if (!["http:", "https:"].includes(url.protocol)) return "";
-
-    return `<a class="button secondary" href="${escapeHtml(url.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`;
-  }).join("");
+const yearElement = $("#year");
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
 }
 
-function renderEmbed(embed) {
+/* EMBED LINK PARSING */
+
+function parseLinks(value) {
+  return String(value || "")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const separator = line.indexOf("|");
+
+      if (separator === -1) {
+        return {
+          label: line,
+          url: safeUrl(line)
+        };
+      }
+
+      return {
+        label: line.slice(0, separator).trim(),
+        url: safeUrl(line.slice(separator + 1).trim())
+      };
+    })
+    .filter((link) => link.label && link.url);
+}
+
+function getFormEmbed() {
+  const color = $("#embed-color")?.value || "#5865f2";
+
+  return {
+    title: $("#embed-heading")?.value.trim() || "Untitled embed",
+    description: $("#embed-description")?.value.trim() || "",
+    color: /^#[0-9a-fA-F]{6}$/.test(color) ? color : "#5865f2",
+    image_url: safeUrl($("#embed-image")?.value.trim() || ""),
+    thumbnail_url: safeUrl($("#embed-thumbnail")?.value.trim() || ""),
+    links: parseLinks($("#embed-links")?.value || ""),
+    footer: $("#embed-footer")?.value.trim() || "",
+    show_timestamp: Boolean($("#embed-timestamp")?.checked),
+    published: Boolean($("#embed-published")?.checked)
+  };
+}
+
+/* BUILD AN EMBED CARD */
+
+function createEmbedCard(embed, showStatus = false) {
   const card = document.createElement("article");
-  card.className = "card embed-card";
-  card.style.borderTop = `4px solid ${/^#[0-9a-f]{6}$/i.test(embed.color || "") ? embed.color : "#8b5cf6"}`;
+  card.className = "embed-preview";
+
+  const color = /^#[0-9a-fA-F]{6}$/.test(embed.color || "")
+    ? embed.color
+    : "#5865f2";
+
+  card.style.setProperty("--embed-color", color);
+
+  const content = document.createElement("div");
+  content.className = "embed-content";
 
   const title = document.createElement("h3");
   title.textContent = embed.title || "Untitled embed";
+  content.appendChild(title);
 
-  const description = document.createElement("p");
-  description.textContent = embed.description || "";
-
-  card.append(title, description);
-
-  if (embed.image_url) {
-    try {
-      const imageUrl = new URL(embed.image_url);
-      if (["https:", "http:"].includes(imageUrl.protocol)) {
-        const image = document.createElement("img");
-        image.src = imageUrl.href;
-        image.alt = embed.title || "Embed image";
-        image.loading = "lazy";
-        image.className = "embed-image";
-        image.onerror = () => image.remove();
-        card.append(image);
-      }
-    } catch {}
+  if (showStatus) {
+    const status = document.createElement("p");
+    status.textContent = embed.published ? "Published" : "Draft";
+    content.appendChild(status);
   }
 
-  if (embed.thumbnail_url) {
-    try {
-      const thumbnailUrl = new URL(embed.thumbnail_url);
-      if (["https:", "http:"].includes(thumbnailUrl.protocol)) {
-        const thumbnail = document.createElement("img");
-        thumbnail.src = thumbnailUrl.href;
-        thumbnail.alt = "Embed thumbnail";
-        thumbnail.loading = "lazy";
-        thumbnail.className = "embed-thumbnail";
-        thumbnail.onerror = () => thumbnail.remove();
-        card.append(thumbnail);
-      }
-    } catch {}
+  if (embed.description) {
+    const description = document.createElement("p");
+    description.textContent = embed.description;
+    content.appendChild(description);
   }
 
-  const links = document.createElement("div");
-  links.className = "embed-links";
-  links.innerHTML = renderLinks(embed.links);
-  card.append(links);
+  const thumbnailUrl = safeUrl(embed.thumbnail_url);
+
+  if (thumbnailUrl) {
+    const thumbnail = document.createElement("img");
+    thumbnail.className = "embed-thumb";
+    thumbnail.src = thumbnailUrl;
+    thumbnail.alt = "Embed thumbnail";
+    thumbnail.loading = "lazy";
+    thumbnail.referrerPolicy = "no-referrer";
+    thumbnail.addEventListener("error", () => thumbnail.remove());
+    content.appendChild(thumbnail);
+  }
+
+  const imageUrl = safeUrl(embed.image_url);
+
+  if (imageUrl) {
+    const image = document.createElement("img");
+    image.className = "embed-image";
+    image.src = imageUrl;
+    image.alt = "Embed image";
+    image.loading = "lazy";
+    image.referrerPolicy = "no-referrer";
+    image.addEventListener("error", () => image.remove());
+    content.appendChild(image);
+  }
+
+  const links = Array.isArray(embed.links) ? embed.links : [];
+  const linkBox = document.createElement("div");
+  linkBox.className = "embed-links";
+
+  links.forEach((link) => {
+    const url = safeUrl(link?.url);
+    if (!url) return;
+
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.textContent = link.label || "Open link";
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    linkBox.appendChild(anchor);
+  });
+
+  if (linkBox.childElementCount) {
+    content.appendChild(linkBox);
+  }
 
   if (embed.footer) {
-    const footer = document.createElement("small");
+    const footer = document.createElement("p");
+    footer.className = "embed-footer";
     footer.textContent = embed.footer;
-    card.append(footer);
+    content.appendChild(footer);
   }
 
   if (embed.show_timestamp && embed.created_at) {
-    const time = document.createElement("small");
-    time.textContent = new Date(embed.created_at).toLocaleString();
-    card.append(time);
+    const timestamp = document.createElement("small");
+    timestamp.textContent = new Date(embed.created_at).toLocaleString();
+    content.appendChild(timestamp);
   }
 
+  card.appendChild(content);
   return card;
 }
 
+/* LIVE PREVIEW */
+
+function renderPreview() {
+  const target = $("#embed-preview");
+  if (!target) return;
+
+  target.replaceChildren();
+  target.appendChild(createEmbedCard(getFormEmbed()));
+}
+
+/* DISPLAY EMBED LISTS */
+
+function renderEmbedList(selector, embeds, staffMode = false) {
+  const target = $(selector);
+  if (!target) return;
+
+  target.replaceChildren();
+
+  if (!embeds.length) {
+    const message = document.createElement("p");
+    message.textContent = staffMode
+      ? "No embeds yet. Create one using the editor."
+      : "No public posts have been published yet.";
+
+    target.appendChild(message);
+    return;
+  }
+
+  embeds.forEach((embed) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "embed-list-item";
+
+    wrapper.appendChild(createEmbedCard(embed, staffMode));
+
+    if (staffMode) {
+      const actions = document.createElement("div");
+      actions.className = "embed-actions";
+
+      const edit = document.createElement("button");
+      edit.type = "button";
+      edit.textContent = "Edit";
+      edit.addEventListener("click", () => populateEditor(embed));
+      actions.appendChild(edit);
+
+      const publish = document.createElement("button");
+      publish.type = "button";
+      publish.textContent = embed.published ? "Unpublish" : "Publish";
+      publish.addEventListener("click", () => togglePublished(embed));
+      actions.appendChild(publish);
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "Delete";
+      remove.addEventListener("click", () => deleteEmbed(embed));
+      actions.appendChild(remove);
+
+      wrapper.appendChild(actions);
+    }
+
+    target.appendChild(wrapper);
+  });
+}
+
+/* LOAD PUBLIC POSTS */
+
 async function loadPublishedEmbeds() {
-  const container = $("#published-embeds");
-  if (!container) return;
+  const target = $("#public-embeds");
+  if (!target) return;
 
   const { data, error } = await supabase
     .from("embeds")
@@ -442,224 +835,23 @@ async function loadPublishedEmbeds() {
     .eq("published", true)
     .order("created_at", { ascending: false });
 
-  container.replaceChildren();
-
   if (error) {
-    const message = document.createElement("p");
-    message.textContent = "Published updates could not be loaded. Check your Supabase table and policies.";
-    container.append(message);
-    console.error("Loading published embeds:", error.message);
+    target.textContent =
+      "Posts could not load. Check your Supabase embeds table and public-read policy.";
+
+    console.error("Public embeds error:", error.message);
     return;
   }
 
-  if (!data || data.length === 0) {
-    const message = document.createElement("p");
-    message.textContent = "No updates have been published yet. Check back soon!";
-    container.append(message);
-    return;
-  }
-
-  data.forEach((embed) => container.append(renderEmbed(embed)));
+  renderEmbedList("#public-embeds", data || []);
 }
 
-function showSignedOut() {
-  $("#staff-login").hidden = false;
-  $("#staff-dashboard").hidden = true;
-  $("#staff-status").textContent = "Sign in with your approved staff account.";
-}
-
-function showSignedIn() {
-  $("#staff-login").hidden = true;
-  $("#staff-dashboard").hidden = false;
-  $("#staff-status").textContent = `Signed in as ${currentUser.email} (${currentRole}).`;
-}
-
-async function checkStaff() {
-  const { data: { user }, error: userError } = await supabase.auth.getUser();
-
-  if (userError || !user) {
-    currentUser = null;
-    currentRole = null;
-    showSignedOut();
-    return;
-  }
-
-  currentUser = user;
-
-  const { data, error } = await supabase
-    .from("staff_members")
-    .select("role")
-    .eq("user_id", user.id)
-    .maybeSingle();
-
-  if (error || !data) {
-    await supabase.auth.signOut();
-    currentUser = null;
-    currentRole = null;
-    showSignedOut();
-    setMessage("#login-message", "This account is not approved for staff access.", true);
-    return;
-  }
-
-  currentRole = data.role;
-  showSignedIn();
-  await loadStaffEmbeds();
-}
-
-$("#login-form")?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  setMessage("#login-message", "Signing in...");
-
-  const email = $("#login-email").value.trim();
-  const password = $("#login-password").value;
-
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  });
-
-  if (error) {
-    setMessage("#login-message", error.message, true);
-    return;
-  }
-
-  $("#login-password").value = "";
-  setMessage("#login-message", "Signed in. Checking staff permissions...");
-  await checkStaff();
-});
-
-$("#forgot-password")?.addEventListener("click", async () => {
-  const email = $("#login-email").value.trim();
-
-  if (!email) {
-    setMessage("#login-message", "Enter your email address first.", true);
-    return;
-  }
-
-  const redirectTo = window.location.origin + window.location.pathname;
-
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo
-  });
-
-  if (error) {
-    setMessage("#login-message", error.message, true);
-  } else {
-    setMessage("#login-message", "If that account exists, a password reset email has been sent.");
-  }
-});
-
-$("#sign-out")?.addEventListener("click", async () => {
-  const { error } = await supabase.auth.signOut();
-
-  if (error) {
-    setMessage("#staff-message", error.message, true);
-    return;
-  }
-
-  currentUser = null;
-  currentRole = null;
-  showSignedOut();
-  setMessage("#login-message", "You have signed out.");
-});
-
-function readLinks() {
-  const raw = $("#embed-links").value.trim();
-  if (!raw) return [];
-
-  return raw.split("\n").map((line) => {
-    const separator = line.indexOf("|");
-
-    if (separator < 1) {
-      throw new Error("Each link must use this format: Label | https://example.com");
-    }
-
-    const label = line.slice(0, separator).trim();
-    const url = line.slice(separator + 1).trim();
-
-    let parsed;
-    try {
-      parsed = new URL(url);
-    } catch {
-      throw new Error(`The URL for "${label}" is not valid.`);
-    }
-
-    if (!label || !["http:", "https:"].includes(parsed.protocol)) {
-      throw new Error("Links must have a label and an HTTP or HTTPS URL.");
-    }
-
-    return { label, url: parsed.href };
-  });
-}
-
-function resetEmbedForm() {
-  editingEmbedId = null;
-  $("#embed-form").reset();
-  $("#embed-form-heading").textContent = "Create an embed";
-  $("#save-embed").textContent = "Save embed";
-  $("#cancel-edit").hidden = true;
-  updatePreview();
-}
-
-function fillEmbedForm(embed) {
-  editingEmbedId = embed.id;
-  $("#embed-title").value = embed.title || "";
-  $("#embed-description").value = embed.description || "";
-  $("#embed-color").value = /^#[0-9a-f]{6}$/i.test(embed.color || "") ? embed.color : "#8b5cf6";
-  $("#embed-image").value = embed.image_url || "";
-  $("#embed-thumbnail").value = embed.thumbnail_url || "";
-  $("#embed-footer").value = embed.footer || "";
-  $("#embed-timestamp").checked = Boolean(embed.show_timestamp);
-  $("#embed-links").value = Array.isArray(embed.links)
-    ? embed.links.map((link) => `${link.label} | ${link.url}`).join("\n")
-    : "";
-  $("#embed-form-heading").textContent = "Edit embed";
-  $("#save-embed").textContent = "Update embed";
-  $("#cancel-edit").hidden = false;
-  updatePreview();
-  $("#embed-form-heading").scrollIntoView({ behavior: "smooth", block: "center" });
-}
-
-function updatePreview() {
-  const preview = $("#embed-preview");
-  if (!preview) return;
-
-  const draft = {
-    title: $("#embed-title")?.value || "Your embed title",
-    description: $("#embed-description")?.value || "Your embed description will appear here.",
-    color: $("#embed-color")?.value || "#8b5cf6",
-    image_url: $("#embed-image")?.value || "",
-    thumbnail_url: $("#embed-thumbnail")?.value || "",
-    footer: $("#embed-footer")?.value || "",
-    show_timestamp: $("#embed-timestamp")?.checked || false,
-    created_at: new Date().toISOString(),
-    links: []
-  };
-
-  try {
-    draft.links = readLinks();
-  } catch {}
-
-  preview.replaceChildren(renderEmbed(draft));
-}
-
-[
-  "#embed-title",
-  "#embed-description",
-  "#embed-color",
-  "#embed-image",
-  "#embed-thumbnail",
-  "#embed-footer",
-  "#embed-links",
-  "#embed-timestamp"
-].forEach((selector) => {
-  $(selector)?.addEventListener("input", updatePreview);
-  $(selector)?.addEventListener("change", updatePreview);
-});
+/* LOAD STAFF POSTS */
 
 async function loadStaffEmbeds() {
-  const container = $("#staff-embed-list");
-  if (!container) return;
+  if (!currentUser || !currentRole) return;
+
+  setStatus("#editor-status", "Loading saved embeds...");
 
   const { data, error } = await supabase
     .from("embeds")
@@ -667,119 +859,103 @@ async function loadStaffEmbeds() {
     .order("created_at", { ascending: false });
 
   if (error) {
-    container.textContent = "Could not load embeds: " + error.message;
+    setStatus(
+      "#editor-status",
+      "Could not load embeds. Check your database and staff permissions.",
+      true
+    );
+
+    console.error("Staff embeds error:", error.message);
     return;
   }
 
-  embeds = data || [];
-  container.replaceChildren();
+  savedEmbeds = data || [];
+  renderEmbedList("#staff-embeds", savedEmbeds, true);
+  setStatus("#editor-status", "");
+}
 
-  if (!embeds.length) {
-    container.textContent = "No embeds yet. Create your first one below.";
-    return;
-  }
+/* FILL THE EDITOR */
 
-  embeds.forEach((embed) => {
-    const row = document.createElement("div");
-    row.className = "staff-embed-row";
+function populateEditor(embed) {
+  $("#embed-id").value = embed.id || "";
+  $("#embed-heading").value = embed.title || "";
+  $("#embed-description").value = embed.description || "";
 
-    const info = document.createElement("div");
-    const title = document.createElement("strong");
-    title.textContent = embed.title || "Untitled embed";
+  $("#embed-color").value =
+    /^#[0-9a-fA-F]{6}$/.test(embed.color || "")
+      ? embed.color
+      : "#5865f2";
 
-    const status = document.createElement("p");
-    status.textContent = embed.published ? "Published" : "Draft";
+  $("#embed-image").value = embed.image_url || "";
+  $("#embed-thumbnail").value = embed.thumbnail_url || "";
 
-    info.append(title, status);
+  $("#embed-links").value = (
+    Array.isArray(embed.links) ? embed.links : []
+  ).map((link) => `${link.label || "Open link"} | ${link.url || ""}`)
+   .join("\n");
 
-    const actions = document.createElement("div");
-    actions.className = "staff-embed-actions";
+  $("#embed-footer").value = embed.footer || "";
+  $("#embed-timestamp").checked = Boolean(embed.show_timestamp);
+  $("#embed-published").checked = Boolean(embed.published);
 
-    const edit = document.createElement("button");
-    edit.type = "button";
-    edit.className = "button secondary";
-    edit.textContent = "Edit";
-    edit.addEventListener("click", () => fillEmbedForm(embed));
+  $("#editor-title").textContent = "Edit an embed";
+  $("#save-embed").textContent = "Save changes";
 
-    const publish = document.createElement("button");
-    publish.type = "button";
-    publish.className = "button secondary";
-    publish.textContent = embed.published ? "Unpublish" : "Publish";
-    publish.addEventListener("click", () => togglePublished(embed));
+  renderPreview();
 
-    const remove = document.createElement("button");
-    remove.type = "button";
-    remove.className = "button danger";
-    remove.textContent = "Delete";
-    remove.addEventListener("click", () => deleteEmbed(embed));
-
-    actions.append(edit, publish, remove);
-    row.append(info, actions);
-    container.append(row);
+  $("#embed-form").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
   });
 }
+
+/* CLEAR THE EDITOR */
+
+function resetEmbedForm() {
+  $("#embed-form").reset();
+  $("#embed-id").value = "";
+  $("#embed-color").value = "#5865f2";
+  $("#embed-timestamp").checked = false;
+  $("#embed-published").checked = false;
+
+  $("#editor-title").textContent = "Create an embed";
+  $("#save-embed").textContent = "Save embed";
+
+  setStatus("#editor-status", "");
+  renderPreview();
+}
+
+$("#clear-editor")?.addEventListener("click", resetEmbedForm);
+
+$("#embed-form")?.addEventListener("input", renderPreview);
+$("#embed-form")?.addEventListener("change", renderPreview);
+
+
+/* SAVE AN EMBED */
 
 $("#embed-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   if (!currentUser || !currentRole) {
-    setMessage("#staff-message", "Please sign in with an approved staff account.", true);
+    setStatus("#editor-status", "You must be signed in as staff.", true);
     return;
   }
 
-  let links;
-  try {
-    links = readLinks();
-  } catch (error) {
-    setMessage("#staff-message", error.message, true);
-    return;
-  }
+  const button = $("#save-embed");
+  button.disabled = true;
 
-  const payload = {
-    title: $("#embed-title").value.trim(),
-    description: $("#embed-description").value.trim(),
-    color: $("#embed-color").value,
-    image_url: $("#embed-image").value.trim() || null,
-    thumbnail_url: $("#embed-thumbnail").value.trim() || null,
-    footer: $("#embed-footer").value.trim() || null,
-    show_timestamp: $("#embed-timestamp").checked,
-    links,
-    updated_at: new Date().toISOString()
-  };
+  setStatus("#editor-status", "Saving embed...");
 
-  if (!payload.title) {
-    setMessage("#staff-message", "Please enter an embed title.", true);
-    return;
-  }
-
-  if (!/^#[0-9a-f]{6}$/i.test(payload.color)) {
-    setMessage("#staff-message", "Choose a valid six-digit hex color.", true);
-    return;
-  }
-
-  for (const field of ["image_url", "thumbnail_url"]) {
-    if (!payload[field]) continue;
-
-    try {
-      const url = new URL(payload[field]);
-      if (!["http:", "https:"].includes(url.protocol)) {
-        throw new Error();
-      }
-    } catch {
-      setMessage("#staff-message", `Please enter a valid HTTP or HTTPS URL for ${field === "image_url" ? "the image" : "the thumbnail"}.`, true);
-      return;
-    }
-  }
-
-  setMessage("#staff-message", "Saving embed...");
+  const id = $("#embed-id").value.trim();
+  const payload = getFormEmbed();
 
   let result;
 
-  if (editingEmbedId) {
+  if (id) {
     result = await supabase
       .from("embeds")
       .update(payload)
-      .eq("id", editingEmbedId)
+      .eq("id", id)
       .select()
       .single();
   } else {
@@ -787,46 +963,72 @@ $("#embed-form")?.addEventListener("submit", async (event) => {
       .from("embeds")
       .insert({
         ...payload,
-        published: false,
         created_by: currentUser.id
       })
       .select()
       .single();
   }
 
+  button.disabled = false;
+
   if (result.error) {
-    setMessage("#staff-message", "Could not save embed: " + result.error.message, true);
+    setStatus(
+      "#editor-status",
+      "Could not save. Check your Supabase columns and staff write permissions.",
+      true
+    );
+
+    console.error("Save error:", result.error.message);
     return;
   }
 
-  setMessage("#staff-message", "Embed saved successfully.");
   resetEmbedForm();
-  await loadStaffEmbeds();
+
+  setStatus("#editor-status", "Embed saved successfully!");
+
+  await Promise.all([
+    loadStaffEmbeds(),
+    loadPublishedEmbeds()
+  ]);
 });
 
-$("#cancel-edit")?.addEventListener("click", resetEmbedForm);
+/* PUBLISH OR UNPUBLISH */
 
 async function togglePublished(embed) {
+  if (!currentUser || !currentRole) return;
+
   const { error } = await supabase
     .from("embeds")
-    .update({
-      published: !embed.published,
-      updated_at: new Date().toISOString()
-    })
+    .update({ published: !embed.published })
     .eq("id", embed.id);
 
   if (error) {
-    setMessage("#staff-message", "Could not update publication status: " + error.message, true);
+    setStatus("#editor-status", "Could not change publishing status.", true);
+    console.error("Publish error:", error.message);
     return;
   }
 
-  setMessage("#staff-message", embed.published ? "Embed unpublished." : "Embed published.");
-  await loadStaffEmbeds();
-  await loadPublishedEmbeds();
+  setStatus(
+    "#editor-status",
+    embed.published ? "Post unpublished." : "Post published."
+  );
+
+  await Promise.all([
+    loadStaffEmbeds(),
+    loadPublishedEmbeds()
+  ]);
 }
 
+/* DELETE AN EMBED */
+
 async function deleteEmbed(embed) {
-  if (!window.confirm(`Delete "${embed.title}" permanently?`)) return;
+  if (!currentUser || !currentRole) return;
+
+  const confirmed = window.confirm(
+    `Delete "${embed.title || "this embed"}"? This cannot be undone.`
+  );
+
+  if (!confirmed) return;
 
   const { error } = await supabase
     .from("embeds")
@@ -834,48 +1036,192 @@ async function deleteEmbed(embed) {
     .eq("id", embed.id);
 
   if (error) {
-    setMessage("#staff-message", "Could not delete embed: " + error.message, true);
+    setStatus("#editor-status", "Could not delete the embed.", true);
+    console.error("Delete error:", error.message);
     return;
   }
 
-  if (editingEmbedId === embed.id) resetEmbedForm();
+  if ($("#embed-id").value === String(embed.id)) {
+    resetEmbedForm();
+  }
 
-  setMessage("#staff-message", "Embed deleted.");
+  setStatus("#editor-status", "Embed deleted.");
+
+  await Promise.all([
+    loadStaffEmbeds(),
+    loadPublishedEmbeds()
+  ]);
+}
+
+/* STAFF LOGIN DISPLAY */
+
+function showLogin(message = "", isError = false) {
+  $("#login-panel").hidden = false;
+  $("#login-panel").style.display = "";
+
+  $("#dashboard").hidden = true;
+  $("#dashboard").style.display = "none";
+
+  $("#role-label").textContent = "";
+  $("#signed-in-as").textContent = "";
+
+  currentUser = null;
+  currentRole = null;
+
+  setStatus("#login-status", message, isError);
+}
+
+function showDashboard(user, role) {
+  currentUser = user;
+  currentRole = role;
+
+  $("#login-panel").hidden = true;
+  $("#login-panel").style.display = "none";
+
+  $("#dashboard").hidden = false;
+  $("#dashboard").style.display = "";
+
+  $("#role-label").textContent = `Role: ${role}`;
+  $("#signed-in-as").textContent =
+    user.email || "Signed-in staff member";
+
+  setStatus("#login-status", "");
+}
+
+/* VERIFY STAFF ACCESS */
+
+async function refreshAuth() {
+  const { data, error } = await supabase.auth.getSession();
+
+  if (error) {
+    showLogin("Could not check your session. Please try again.", true);
+    console.error(error.message);
+    return;
+  }
+
+  const user = data.session?.user;
+
+  if (!user) {
+    showLogin();
+    return;
+  }
+
+  const { data: member, error: staffError } = await supabase
+    .from("staff_members")
+    .select("role")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (staffError) {
+    showLogin(
+      "Could not verify staff access. Check the staff_members table and its read policy.",
+      true
+    );
+
+    console.error(staffError.message);
+    return;
+  }
+
+  if (!member || !["admin", "editor", "staff"].includes(member.role)) {
+    showLogin(
+      "Your account has no staff access. Ask an administrator to add your account.",
+      true
+    );
+    return;
+  }
+
+  showDashboard(user, member.role);
   await loadStaffEmbeds();
-  await loadPublishedEmbeds();
 }
 
-async function startApp() {
-  showPage(window.location.hash === "#staff" ? "staff" : "home");
-  await loadPublishedEmbeds();
-  await checkStaff();
+/* SIGN IN */
 
-  supabase.auth.onAuthStateChange(() => {
-    setTimeout(() => {
-      checkStaff();
-      loadPublishedEmbeds();
-    }, 0);
+$("#login-form")?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const email = $("#login-email").value.trim();
+  const password = $("#login-password").value;
+
+  setStatus("#login-status", "Signing in...");
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password
   });
-}
 
-startApp().catch((error) => {
-  console.error("Website startup error:", error);
-  setMessage("#staff-message", "The website encountered an error. Check the browser console.", true);
+  if (error) {
+    setStatus("#login-status", error.message, true);
+    return;
+  }
+
+  await refreshAuth();
 });
-</script>
 
+/* PASSWORD RESET */
 
-<!-- Final website startup and navigation checks -->
-<script>
-  // Keep the page navigation working when the site opens directly at #staff.
-  window.addEventListener("DOMContentLoaded", () => {
-    const staffLink = document.querySelector('[data-page="staff"]');
+$("#reset-password")?.addEventListener("click", async () => {
+  const email = $("#login-email").value.trim();
 
-    if (window.location.hash === "#staff" && staffLink) {
-      staffLink.classList.add("active");
-    }
+  if (!email) {
+    setStatus("#login-status", "Enter your email address first.", true);
+    $("#login-email").focus();
+    return;
+  }
+
+  setStatus("#login-status", "Requesting password reset...");
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo:
+      `${window.location.origin}${window.location.pathname}#staff`
   });
+
+  if (error) {
+    setStatus("#login-status", error.message, true);
+    return;
+  }
+
+  setStatus(
+    "#login-status",
+    "If that account exists, a password-reset email has been sent."
+  );
+});
+
+/* SIGN OUT */
+
+$("#sign-out")?.addEventListener("click", async () => {
+  setStatus("#editor-status", "Signing out...");
+
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    setStatus("#editor-status", error.message, true);
+    return;
+  }
+
+  resetEmbedForm();
+  showLogin("You have signed out.");
+});
+
+/* KEEP LOGIN STATE UPDATED */
+
+supabase.auth.onAuthStateChange(() => {
+  window.setTimeout(() => {
+    refreshAuth();
+  }, 0);
+});
+
+/* START THE WEBSITE */
+
+showPage(
+  window.location.hash.replace("#", "") === "staff" ? "staff" : "home",
+  false
+);
+
+renderPreview();
+loadPublishedEmbeds();
+refreshAuth();
 </script>
+
 
 </body>
 </html>
